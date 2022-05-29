@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{asset('public/frontend/css/style1.css')}}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://kit.fontawesome.com/4eb98e0bb5.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
+  <title>Trang cá nhân</title>
+</head>
+<body>
+
+  @foreach($show_data as $key =>$data_user)
+  @foreach($show_data3 as $key =>$data_theme)
+  <div class="container bia" style=" background-image: linear-gradient({{($data_theme->MauBiaTren)}}, {{($data_theme->MauBiaDuoi)}});">
+    <div class="img_bia">
+      <img class="img_img" src="{{asset('public/frontend/img/'.$data_user->AnhBia)}}" alt="">
+    </div>
+    <div class="row infor">
+      <div class="col-3  avata">
+        <img class="img_avata" src="{{asset('public/frontend/img/'.$data_user->AnhDT)}}" alt="">
+      </div>
+      <div class="col-6  name">
+        <span class="name_name" style="color:{{($data_theme->MauChu)}} ;">
+          {{($data_user->HoTen)}}
+        </span>
+      </div>
+      <div class="col-3  chinhsua">
+        <button type="" class="btn btn-primary btn_chinhsua" data-toggle="modal" data-target="#ChinhSua">Chỉnh sửa trang cá nhân</button>
+        <a href="{{URL::to('/user-logout')}}" class=""><button type="button" class="btn btn-danger btn_dangxuat">Đăng Xuất</button></a>
+      </div>
+    </div>
+    
+  </div>
+  
+  
+
+
+  <div class="qwe"><a href="{{URL::to('/chat/'.$data_user->idUser)}}"><i class="fas fa-comments-dollar mmm"></i></i></a></div>
+    <div class="container abc" style="background-color:{{($data_theme->MauThan)}} ;">
+    <div class="row contents">
+      <div class="col-md-4 col-sm-12">
+          <div class="thongtin" style="background-color:{{($data_theme->MauNoiDung)}};color:{{($data_theme->MauChu)}} ;">
+            <h2 class="gioithieu">Giới thiệu</h2>
+            <p class="tieusu"style="color:{{($data_theme->ChuTS)}} ;">{{($data_user->TieuSu)}}</p>
+            <div class="diachi">
+              <div class="">Địa chỉ:</div>
+              <div class="infor_1">{{($data_user->DiaChi)}}</div>
+            </div>
+            <div class="diachi">
+              <div class="">Email:</div>
+              <div class="infor_1">{{($data_user->Email)}}</div>
+            </div>
+            <div class="diachi">
+              <div class="">Ngày sinh:</div>
+              <div class="infor_1">{{($data_user->NgaySinh)}}</div>
+            </div>
+            <div class="diachi">
+              <div class="">Giới Tính:</div>
+              <div class="infor_1">{{($data_user->GioiTinh)}}</div>
+            </div>
+          </div>
+        <div class="thongtin" style="background-color:{{($data_theme->MauNoiDung)}};color:{{($data_theme->MauChu)}} ;">
+          <h2 class="gioithieu">Bạn bè hệ thống</h2>
+          <table class="table">
+            <tbody>
+                @foreach($all_user as $key => $all)
+                <tr>
+                  <td class="a2a"><div class="avata_icon a1a"> <img src="{{asset('public/frontend/img/'.$all->AnhDT)}}" alt=""></div></td>
+                  <td class="a2a" style="background-color:{{($data_theme->MauNoiDung)}};color:{{($data_theme->MauChu)}} ;"> {{($all->HoTen)}}</td>
+                  <td class=""><a href="{{URL::to('/xemthanhvien/'.$all->idUser)}}"><button class="us"><i class="far fa-eye"></i></button></a></td>
+                  <td class=""><button class="us"><i class="far fa-comments"></i></button></td>
+                </tr>
+                @endforeach
+              </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-12  ">
+        <div class="dangblog"style="background-color: {{($data_theme->MauNoiDung)}};">
+          <div class="avata_icon">
+              
+            <img src="{{asset('public/frontend/img/'.$data_user->AnhDT)}}" alt="">
+          </div>
+          <button type="button"style="background-color:{{($data_theme->MauThan)}};color:{{($data_theme->MauChu)}} ; " class="content_blog" data-toggle="modal" data-target="#myModal">Viết blog</button>
+        </div>
+        <div class="baiviet" style="background-color:{{($data_theme->MauNoiDung)}};color:{{($data_theme->MauChu)}} ;  ">
+          <h2>Bài viết</h2>
+        </div>
+        @foreach($show_data2 as $key =>$data_blog)
+          <div div class="baiviet_infor" style="background-color:{{($data_theme->MauNoiDung)}};color:{{($data_theme->MauChu)}} ;">
+            <div class="baiviet_infor-header">
+              <div class="avata_icon">
+                <img src="{{asset('public/frontend/img/'.$data_user->AnhDT)}}" alt="">
+                <div class="name_icon">
+                {{($data_blog->HoTen)}}
+                </div>
+                
+              </div>
+              <div class="tuychon">
+                      
+                     <button class="us"><i class="far fa-edit" data-toggle="modal" data-target="#suabaiviet"></i></button>
+                      <a href="{{URL::to('/delete-blog/'.$data_blog->idBlog)}}"  onclick="return confirm('Bạn có chắc chắn muốn xoá bài viết này không?')"><button class="us"><i class="far fa-trash-alt"></i></button></a>
+              </div>
+            </div>
+            <div class="contents_blog">
+              <p> {{($data_blog->NoiDung)}}</p>
+              <div class="contents_img">
+                @if($data_blog->HinhAnh)
+                  <img class="oqw" src="{{asset('public/frontend/img/'.$data_blog->HinhAnh)}}" alt="">
+                @endif
+              </div>
+            </div>
+          </div>
+        @endforeach
+        </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  @endforeach
+  @endforeach
+
+
+  
+  <!-- tạo blog   -->
+  @foreach($show_data3 as $key =>$data_theme)
+  <div class="modal modal1" id="myModal">
+    <div class="modal-dialog">
+      <div style="background-color:{{($data_theme->MauNoiDung)}};color:{{($data_theme->MauChu)}} ;  "  class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title " style="margin: auto;font-size: 20px;">Tạo bài viết</h4>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 14px;">Huỷ</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="baiviet_infor-header">
+            <div class="avata_icon">
+              @foreach($show_data as $key =>$data_user)
+              <img src="{{asset('public/frontend/img/'.$data_user->AnhDT)}}" alt="">
+              <div class="name_icon"> {{($data_user->HoTen)}}</div>
+              @endforeach
+            </div>
+          </div>
+          <form action="{{URL::to('/them-baiviet')}}" method= "post" enctype='multipart/form-data'>
+            @csrf
+            <textarea  style="background-color:{{($data_theme->MauNoiDung)}};color:{{($data_theme->MauChu)}} ; opacity: 0.7;  " class="contents_modal" name="noidung" id="" cols="30" rows="10" placeholder="Bạn đang nghĩ gì ?"></textarea>
+            <span style="display: block;">Thêm vào bài viết: Ảnh/Video</span>
+            <input type="file" id="img" name="hinhanh" accept="image/*" >
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary dangbai">Đăng bài</button>  
+        </div> 
+            </form>
+      </div>
+    </div>
+  </div>
+  @endforeach
+
+
+  <!-- SUABLOG -->
+  
+   @foreach($show_data3 as $key =>$data_theme)
+   @foreach($show_data as $key =>$data_user)
+   @foreach($show_data2 as $key =>$data_blog)
+  <div class="modal modal" id="suabaiviet">
+    <div class="modal-dialog " >
+      <div style="background-color:{{($data_theme->MauNoiDung)}};color:{{($data_theme->MauChu)}} ;  "  class="modal-content ">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title " style="margin: auto;font-size: 20px;">Tạo bài viết</h4>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 14px;">Huỷ</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="baiviet_infor-header">
+            <div class="avata_icon">
+              <img src="{{asset('public/frontend/img/'.$data_user->AnhDT)}}" alt="">
+              <div class="name_icon"> {{($data_user->HoTen)}}</div>
+            </div>
+          </div>
+          <form action="{{URL::to('/sua-baiviet/'.$data_blog->idBlog)}}" method= "post" enctype='multipart/form-data'>
+           @csrf
+            <textarea style="background-color:{{($data_theme->MauNoiDung)}};color:{{($data_theme->MauChu)}} ;  " class="contents_modal aaaa" name="noidung" id="" cols="30" rows="10" placeholder="Bạn đang nghĩ gì ?">{{($data_blog->NoiDung)}}</textarea>
+              @if($data_blog->HinhAnh)
+                <img class="ddd" src="{{asset('public/frontend/img/'.$data_blog->HinhAnh)}}" alt="">
+              @endif
+              <span style="display: block;">Thay đổi ảnh: Ảnh/Video</span>
+              <input type="file" id="img" name="hinhanh" accept="image/*" multiple>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary dangbai">Lưu</button>  
+        </div> 
+          </form>
+      </div>
+    </div>
+  </div>
+  @endforeach
+  @endforeach
+  @endforeach
+
+  @foreach($show_data3 as $key =>$data_theme)
+  
+  <!-- CHỈNH SỬA TRANG CÁ NHÂN -->
+  <?php
+    $idUser= Session::get('idUser');
+    if($idUser)
+    {
+      echo $idUser;
+    };
+  ?>
+
+  <div class="modal  " id="ChinhSua">
+    <div class="modal-dialog xyz">
+      <div class="modal-content plm" style="background-color:{{($data_theme->MauNoiDung)}};color:{{($data_theme->MauChu)}} ;  ">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title " style="margin: auto;font-size: 20px;">Chỉnh sửa trang cá nhân</h4>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 14px;">Huỷ</button>
+          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="group1">
+            <div class="group1_header">
+              <span class="qaz">Thay đổi Theme</span>
+            </div>
+            <div class="group1_contents">
+              <div class="bnm">
+                    @foreach($show_data as $key =>$data_user)
+                <form action="{{URL::to('/thaydoi-theme/'.$idUser)}}" method="post">
+                @method('put') 
+                @method('get') 
+                @csrf
+                  <select name="suatheme" style="background-color:{{($data_theme->MauNoiDung)}};color:{{($data_theme->MauChu)}} ; opacity: 0.7; margin-bottom: 10px; " class="form-select" value="{{($data_user->idTheme)}}" aria-label="Default select example">
+                    <option selected disabled>{{($data_user->idTheme)}}</option>
+                    @endforeach
+                    @foreach($all_theme as $key =>$themes)
+                    <option value="{{($themes->idTheme)}}">{{($themes->idTheme)}}</option>
+                    @endforeach
+                  </select>
+                  <button type="submit" style="font-size: 14px; min-width: 100px;" class="btn btn-primary">Thay đổi và đăng xuất</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="group1">
+            <div class="group1_header">
+              <span class="qaz">Ảnh đại diện</span>
+            </div>
+            <div class="group1_contents">
+              @foreach($show_data as $key =>$data_user)
+              <img class="img_avata1" src="{{asset('public/frontend/img/'.$data_user->AnhDT)}}" alt="">
+              @endforeach
+              <div class="bnm1">
+                <form action="{{URL::to('/sua-anhdt/'.$idUser)}}" method="post" enctype='multipart/form-data'>
+                @method('put') 
+                @method('get') 
+                @csrf
+                  <label for="formFile" class="form-label">Chọn ảnh từ thiết bị</label>
+                  <input type="file" class="form-control" id="img" name="hinhanh" accept="image/*" >
+                  <button type="submit" style="font-size: 14px; min-width: 100px;" class="btn btn-primary">Thay đổi</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="group1">
+            <div class="group1_header">
+              <span class="qaz">Ảnh bìa</span>
+            </div>
+            <div class="group1_contents">
+              @foreach($show_data as $key =>$data_user)
+              <img class="chinhsua_img_img" src="{{asset('public/frontend/img/'.$data_user->AnhBia)}}" alt="">
+              @endforeach
+              <div class="bnm1">
+                <form action="{{URL::to('/sua-anhbia/'.$idUser)}}" method="post" enctype='multipart/form-data'>
+                  @method('put') 
+                  @method('get') 
+                  @csrf
+                  <label for="formFile" class="form-label">Chọn ảnh từ thiết bị</label>
+                  <input type="file" class="form-control" id="img" name="hinhanh" accept="image/*" >
+                  <button type="submit" style="font-size: 14px; min-width: 100px;" class="btn btn-primary">Thay đổi</button>
+               </form>
+              </div>
+            </div>
+          </div>
+          <div class="group1">
+            <div class="group1_header">
+              <span class="qaz">Tiểu sử</span>
+            </div>
+            <form class="group1_contents" action="{{URL::to('/update_tieusu-user/'.$idUser)}}" method="post" >
+              @method('put') 
+              @method('get') 
+              @csrf
+              @foreach($show_data as $key =>$data_user)
+              <textarea style="background-color:{{($data_theme->MauNoiDung)}};color:{{($data_theme->MauChu)}} ; opacity: 0.7;  " name="TieuSu" id="" cols="30" class="chinhsua_tieusu" rows="10">{{($data_user->TieuSu)}}</textarea>
+              @endforeach
+              <div class="bnm">
+                <a href=""><button type="button" style="font-size: 14px; min-width: 100px;" class="btn btn-secondary">Huỷ</button></a>
+                <button type="submit" style="font-size: 14px; min-width: 100px; margin-left: 10px;" class="btn btn-primary">Lưu</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+  </div>
+  @endforeach
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
